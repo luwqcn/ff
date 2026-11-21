@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="color-scheme" content="light">
+<title>{{ meta.title }}</title>
+<link rel="stylesheet" href="assets/app.css">
+<link rel="icon" type="image/svg+xml" href="favicon.svg">
+</head>
+<body>
+<div class="page">
+  <header class="head">
+    <div class="brandrow">
+      <span class="mark" aria-hidden="true"><svg viewBox="0 0 32 32" xmlns="http://www.w3.org/2000/svg">
+        <rect class="mark-bg" width="32" height="32" rx="5"/>
+        <path class="mark-wave" d="M7 18 A7 7 0 0 1 14 25"/>
+        <path class="mark-wave" d="M7 11 A14 14 0 0 1 21 25"/>
+        <circle class="mark-dot" cx="7" cy="25" r="2.2"/>
+      </svg></span>
+      <h1>{{ meta.title }}</h1>
+    </div>
+    <p class="tagline">{{ meta.description }}</p>
+  </header>
+
+  <main id="catalog" class="catalog"></main>
+
+  <footer class="foot">
+    <span id="footStat">—</span>
+  </footer>
+</div>
+<script>window.FF_BOOT = {{ boot_json|safe }};</script>
+<script src="assets/app.js"></script>
+</body>
+</html>

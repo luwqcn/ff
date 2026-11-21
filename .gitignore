@@ -1,0 +1,11 @@
+# 运行时数据：全部不进库
+#   state.db / fetch-stats.json —— 抓取状态，CI 用 actions/cache 持久化
+#   last-build-hash             —— 内容指纹，CI 用 actions/cache 持久化（进 git 会 push 循环）
+#   source-hash / feeds.json    —— 本地同步与解析状态
+#   last-run.log / changed      —— 运行日志与变化标志
+data/
+dist/
+
+# Python
+__pycache__/
+*.pyc

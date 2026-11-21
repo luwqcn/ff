@@ -1,0 +1,71 @@
+# ff 定时抓取 + 直传 Cloudflare Pages
+# 生效位置：.github/workflows/ff.yml
+name: ff sync
+
+on:
+  # 本地 ff-sync.sh 推送 ff.org / 代码改动后立刻跑一次（直传不产生 commit，不会循环）
+  push:
+    branches: [main]
+    paths:
+      - 'ff.org'
+      - 'scripts/**'
+      - 'static/**'
+      - 'templates/**'
+      - '.github/workflows/ff.yml'
+  # 定时兜底：每 4 小时抓新文章（UTC 00/04/08/12/16/20 = 北京 08/12/16/20/00/04）
+  schedule:
+    - cron: '0 0,4,8,12,16,20 * * *'
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+concurrency:
+  group: ff-sync
+  cancel-in-progress: false
+
+jobs:
+  sync:
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.13'
+
+      # key 每次 run 都新建、restore-keys 命中上一次：GitHub 缓存同 key 不可变，
+      # 若固定 key 会导致 state.db 永远停在首次缓存（ETag 失效、每次全量抓）。
+      # state.db 只有几十 KB，条目累积可忽略（GitHub 还会自动清理 7 天未访问的缓存）。
+      - name: 恢复抓取状态
+        uses: actions/cache@v4
+        with:
+          path: |
+            data/state.db
+            data/last-build-hash
+          key: ff-state-${{ github.run_id }}
+          restore-keys: ff-state-
+
+      - name: 安装依赖
+        run: pip install feedparser httpx jinja2
+
+      # ff_run.sh 用纯 Python 解析 ff.org，CI 不需要 Emacs
+      - name: 解析 / 抓取 / 生成
+        id: sync
+        env:
+          FF_SITE_URL: https://ff.luwq.cn
+          FF_PYTHON: python
+          FF_SOURCE: ${{ github.workspace }}/ff.org
+        run: bash scripts/ff_run.sh
+
+      - name: 有变化才直传 Cloudflare Pages
+        if: steps.sync.outputs.changed == '1'
+        env:
+          CLOUDFLARE_API_TOKEN: ${{ secrets.CLOUDFLARE_API_TOKEN }}
+          CLOUDFLARE_ACCOUNT_ID: ${{ secrets.CLOUDFLARE_ACCOUNT_ID }}
+        run: npx --yes wrangler@4 pages deploy dist --project-name=feedfinder --branch=main
+
+      - name: 记录跳过
+        if: steps.sync.outputs.changed != '1'
+        run: echo "产物无变化，本次跳过部署"

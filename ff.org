@@ -1,0 +1,116 @@
+#+TITLE: FeedFinder
+#+DATE: <2026-11-20 五 20:16>
+#+DESCRIPTION: 通过 RSS 订阅自己喜欢阅读的博客。
+#+TAGS: 博客, 阅读
+
+* 独立博客
+收集以生活、随笔、阅读等主题文章为主的博客，观人生百态。
+** [[https://yihui.org][谢益辉]]
+:PROPERTIES:
+:URL: https://yihui.org/cn/index.xml
+:ENABLED: yes
+:INTERVAL: 14400
+:END:
+大佬，善诗文。
+** [[https://freemind.pluskid.org][Free Mind]]
+:PROPERTIES:
+:URL: https://freemind.pluskid.org/rss.xml
+:ENABLED: yes
+:INTERVAL: 14400
+:END:
+张驰原，大佬，技术为多。
+** [[https://hongtaoh.com/cn/][郝鸿涛]]
+:PROPERTIES:
+:URL: https://hongtaoh.com/cn/index.xml
+:ENABLED: yes
+:INTERVAL: 14400
+:END:
+计算机博士，有随笔有技术教程，能学到不少。
+** [[https://xianmin.org][贤民]]
+:PROPERTIES:
+:URL: https://www.xianmin.org/index.xml
+:ENABLED: yes
+:INTERVAL: 14400
+:END:
+自学计算机技术的榜样。
+** [[https://xinsenz.com][星辰茶话]]
+:PROPERTIES:
+:URL: https://xinsenz.com/feed
+:ENABLED: yes
+:INTERVAL: 14400
+:END:
+一位80后的博客，生活方式。
+** [[https://liuz.cn][刘郎阁]]
+:PROPERTIES:
+:URL: https://liuz.cn/feed/
+:ENABLED: yes
+:INTERVAL: 14400
+:END:
+生活与技术类文章。
+** [[https://lhcy.org][林海草原]]
+:PROPERTIES:
+:URL: https://lhcy.org/feed/
+:ENABLED: yes
+:INTERVAL: 14400
+:END:
+文字真诚。
+** [[https://yayu.net][雅余]]
+:PROPERTIES:
+:URL: https://yayu.net/feed
+:ENABLED: yes
+:INTERVAL: 14400
+:END:
+生活方式，极简，影像。
+** [[https://shitao5.org][吴诗涛]]
+:PROPERTIES:
+:URL: https://shitao5.org/index.xml
+:ENABLED: yes
+:INTERVAL: 14400
+:END:
+嘉兴人，极自律。
+** [[https://tao.zz.ac][涛叔]]
+:PROPERTIES:
+:URL: https://tao.zz.ac/feed.xml
+:ENABLED: yes
+:INTERVAL: 14400
+:END:
+技术为主，但偶尔一篇生活文，能给人不少启发。
+** [[https://lms.im][LMS]]
+:PROPERTIES:
+:URL: https://lms.im/feed
+:ENABLED: yes
+:INTERVAL: 14400
+:END:
+80后博主，很早就关注了。
+** [[https://liangmouyin.com][梁三川]]
+:PROPERTIES:
+:URL: https://liangmouyin.com/index.xml
+:ENABLED: yes
+:INTERVAL: 14400
+:END:
+原名梁某银，日更，文笔不错。
+
+* 博客聚集
+阅读各博客聚集的精选文章。
+** [[https://www.foreverblog.cn][十年之约]]
+:PROPERTIES:
+:URL: https://www.foreverblog.cn/daily.xml
+:ENABLED: yes
+:INTERVAL: 14400
+:END:
+最早加入的博客聚集项目，2026年改版后增加了很多功能，订阅每日推荐文章。
+** [[https://www.boyouquan.com][博友圈]]
+:PROPERTIES:
+:URL: https://www.boyouquan.com/feed.xml?sort=recommended
+:ENABLED: yes
+:INTERVAL: 14400
+:END:
+博客人的朋友圈，功能也推多，订阅一个推荐文章。
+** [[https://ruae.com][万界书简]]
+:PROPERTIES:
+:URL: https://ruae.com/rss
+:ENABLED: yes
+:INTERVAL: 14400
+:END:
+把博主称作写信人，一篇文章称作一封书简，还挺有意思。
+

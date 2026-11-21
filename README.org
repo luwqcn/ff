@@ -1,0 +1,88 @@
+#+TITLE: FeedFinder
+
+博客订阅展示站：从 Org 源清单读订阅源，定时抓取，生成单页展示站 + 部署到 Cloudflare Pages。
+
+* 目录与职责
+
+- *源清单（唯一编辑处）*：weborg 仓库的 =org/ff.org=（与本仓库同级）
+  - *订阅源*：任意级别的标题，只要带 Org 链接 =[[博客主页][源名]]= 且属性抽屉有 =:URL:=，就是源（级别不参与判定）。属性抽屉写 =URL=（feed 地址）、=ENABLED=、=INTERVAL=（秒）；兼容 =- [[博客主页][源名]]= 列表项与旧 =:LINK:= 属性写法。标题行尾可带 Org 标签（如 =:80后:=），解析时自动剥掉。
+  - *分类（层级自适应）*：多个一级标题 → 只看一级标题；只有一个一级标题 → 一级标题是分类，某个二级标题下若有 ≥2 个三级订阅源，该二级标题也算分类（否则不算）。没有一级标题时降级：顶层节点下含 ≥2 个直接子源的算分类。
+  - 分类/源标题下的正文段落 = 各自的简介，照抄原文展示，代码不写死文案。
+  - 每个源归到最近的分类祖先；分类本身不作为源。
+- *本项目*：独立的 git 仓库（本项目根目录），推送到自己的 GitHub 远端。
+  根目录的 =ff.org= 是源清单的*镜像副本*，由同步脚本生成，CI 读它（CI 里没有 weborg）。
+
+#+BEGIN_SRC text
+feedfinder/
+  ff.org                源清单镜像（自动生成，勿手改）
+  scripts/
+    ff_parse.py         纯 Python：ff.org -> data/feeds.json（CI 无 Emacs 依赖）
+    ff-parse.el          旧版 Emacs 解析器，保留作对照，不再被调用
+    ff_fetch.py          增量抓取 -> data/state.db（SQLite，ETag 条件请求）
+    ff_generate.py       生成 dist/：JSON + 静态站（内容指纹判变化）
+    ff_run.sh            解析/抓取/生成一条龙
+    ff-sync.sh           把 weborg 的 ff.org 同步过来、提交、推 GitHub
+  templates/index.html   页面骨架
+  static/                样式与脚本
+  data/                  运行时数据（gitignore）
+  dist/                  静态产物（gitignore，部署这个目录）
+  .github/workflows/ff.yml  GitHub Actions（生效文件）
+  ci/ff.yml.template     workflow 副本，改了记得同步过去
+#+END_SRC
+
+* 本地改了 ff.org 之后
+
+*方式一（自动）*：在 weborg 仓库照常 =git commit=（含 =org/ff.org=），post-commit hook 会自动调用 =ff-sync.sh=：复制源清单 → 提交 → 推 GitHub → 触发 Actions。日志在 =data/sync.log=。
+
+*方式二（手动）*：不想提交 weborg 时，直接跑：
+
+#+BEGIN_SRC sh
+cd /path/to/feedfinder
+./scripts/ff-sync.sh -m "加了两个新博客"
+#+END_SRC
+
+脚本用 SHA256 内容指纹判断，源清单没变就跳过；要强制推送加 =--force=；只看不推加 =--dry-run=。
+
+推送需要 GitHub PAT（Contents: Read and write），通过 =GH_TOKEN= 环境变量传入；没设就用 git 已配置的凭证。
+
+* 本地预览
+
+#+BEGIN_SRC sh
+cd /path/to/feedfinder
+./scripts/ff_run.sh --serve        # http://127.0.0.1:1314/
+#+END_SRC
+
+脚本默认读 =../weborg/org/ff.org=；找不到时回退到本仓库的 =ff.org= 副本（跟 CI 一致）。
+
+* GitHub Actions（路线 A · wrangler 直传）
+
+workflow 已激活在 =.github/workflows/ff.yml=（=ci/ff.yml.template= 是同样内容的副本）。触发方式：
+
+- *源清单改动*：=ff-sync.sh= 推送后立刻跑一次（改完即生效）
+- *定时兜底*：每 4 小时（北京 08/12/16/20/00/04）抓新文章
+- *手动*：workflow_dispatch
+
+关键设计：
+
+- =actions/cache= 用 =key: ff-state-${{ github.run_id }}= + =restore-keys: ff-state-=：每次 run 恢复上一次的状态、再存一份新的。GitHub 缓存同 key 不可变，*不能固定 key*，否则 =state.db= 永远停在首次缓存，ETag 失效、每次全量抓。state.db 只有几十 KB，条目累积可忽略。
+- 生成器用*内容指纹*（只含文章/源/样式/模板，剔除时间戳）判断变化——否则 CI 每次全新环境下时间戳必变，会导致「永远有变化、每次都部署」。
+- 只有 =changed=1= 时才 =wrangler pages deploy=；直传不消耗 Cloudflare Pages 的每月 500 次构建配额。
+- 解析 =ff.org= 用纯 Python（=ff_parse.py=），CI 不需要安装 Emacs。
+
+需要的 Secrets：
+
+- =CLOUDFLARE_API_TOKEN=：Pages:Edit 权限
+- =CLOUDFLARE_ACCOUNT_ID=：在 Cloudflare 后台复制你自己的 Account ID
+
+* 上线步骤
+
+1. 建 GitHub 仓库（建议公开，便于匿名查 Actions），把本项目推上去。
+2. 建 Cloudflare Pages 项目 =feedfinder=（Direct Upload）——项目名以 Cloudflare 后台为准，别按域名猜。
+3. 在 Cloudflare 给你的域名加 CNAME：=ff= → =feedfinder.pages.dev=。
+4. 在 GitHub 仓库配上面两个 Secrets，放好 workflow。
+5. 跑一次 =ff-sync.sh --force= 触发首次部署。
+
+* 规则备忘
+
+- 只展示近 48 小时文章（=FF_FRESH_HOURS= 可调）；独立博客每源最多 5 篇，博客聚集每源 2 篇。
+- 本站只做展示，不生成 Atom/RSS 订阅、页面无订阅入口。
