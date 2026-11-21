@@ -123,7 +123,7 @@
 满心，90后，生活类博客。
 ** [[https://me.xu19.com][我是军爸]] :80后:
 :PROPERTIES:
-:URL: https://zhoutian.com/rss.xml
+:URL: https://me.xu19.com/feed/
 :ENABLED: yes
 :END:
 军爸，从事单片机编程教育行业。
