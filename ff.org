@@ -1,10 +1,10 @@
 #+TITLE: FeedFinder
 #+DATE: <2026-11-20 五 20:16>
-#+DESCRIPTION: 通过 RSS 订阅自己喜欢阅读的博客。
+#+DESCRIPTION: FeedFinder, 订阅自己喜欢阅读的博客。
 #+TAGS: 博客, 阅读
 
 * 独立博客
-收集以生活、随笔、阅读等主题文章为主的博客，观人生百态。
+收集以生活、随笔、阅读等主题文章为主的博客，观人生百态。订阅地址皆从网站公开渠道获取，如有不便请通过[[mailto:lu@weiqiang.org][邮件]]联系删除。
 ** [[https://yihui.org][谢益辉]]
 :PROPERTIES:
 :URL: https://yihui.org/cn/index.xml
@@ -33,7 +33,7 @@
 :INTERVAL: 14400
 :END:
 自学计算机技术的榜样。
-** [[https://xinsenz.com][星辰茶话]]
+** [[https://xinsenz.com][星辰茶话]] :80后:
 :PROPERTIES:
 :URL: https://xinsenz.com/feed
 :ENABLED: yes
@@ -75,7 +75,7 @@
 :INTERVAL: 14400
 :END:
 技术为主，但偶尔一篇生活文，能给人不少启发。
-** [[https://lms.im][LMS]]
+** [[https://lms.im][LMS]] :80后:
 :PROPERTIES:
 :URL: https://lms.im/feed
 :ENABLED: yes
@@ -89,6 +89,50 @@
 :INTERVAL: 14400
 :END:
 原名梁某银，日更，文笔不错。
+** [[https://cuixiping.com][崔话记]] :80后:
+:PROPERTIES:
+:URL: https://cuixiping.com/blog/feed/
+:ENABLED: yes
+:INTERVAL: 14400
+:END:
+老博客，内容丰富，温度深度兼具。
+** [[https://weiwenchao.com][魏文超]] :80后:
+:PROPERTIES:
+:URL: https://www.weiwenchao.com/rss.xml
+:ENABLED: yes
+:INTERVAL: 14400
+:END:
+生活记录，常有灵光一闪。
+** [[http://versky.com][静水流渊]] :80后:
+:PROPERTIES:
+:URL: http://versky.com/feed
+:ENABLED: yes
+:END:
+刚开始独立博客时的一位博友，更新至今。
+** [[https://taxodium.ink][Taxodium]]
+:PROPERTIES:
+:URL: https://taxodium.ink/rss.xml
+:ENABLED: yes
+:END:
+技术、日常，emacs,等等，内容颇有质量。
+** [[https://zhoutian.com][周天记]]
+:PROPERTIES:
+:URL: https://zhoutian.com/rss.xml
+:ENABLED: yes
+:END:
+满心，90后，生活类博客。
+** [[https://me.xu19.com][我是军爸]] :80后:
+:PROPERTIES:
+:URL: https://zhoutian.com/rss.xml
+:ENABLED: yes
+:END:
+军爸，从事单片机编程教育行业。
+** [[https://vind.ink][风·墨]]
+:PROPERTIES:
+:URL: https://Vind.ink/feed/
+:ENABLED: yes
+:END:
+摄影、音乐、博客、生活。
 
 * 博客聚集
 阅读各博客聚集的精选文章。
