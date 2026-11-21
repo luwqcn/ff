@@ -1,5 +1,7 @@
 # ff 定时抓取 + 直传 Cloudflare Pages
 # 生效位置：.github/workflows/ff.yml
+# 注意：force push（重写历史）产生的 push 事件不会触发本工作流的 paths 过滤，
+#       历史重写后需再做一次普通 push，或直接走定时 / workflow_dispatch 触发。
 name: ff sync
 
 on:
