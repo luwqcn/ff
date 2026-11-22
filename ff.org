@@ -4,7 +4,7 @@
 #+TAGS: 博客, 阅读
 
 * 独立博客
-收集以生活、随笔、阅读等主题文章为主的博客，观人生百态。订阅地址皆从网站公开渠道获取，如有不便请通过[[mailto:lu@weiqiang.org][邮件]]联系删除。
+收集以生活、随笔、阅读等主题文章为主的博客，观人生百态。订阅地址皆从网站公开渠道获取，如有不便请通过[[mailto:lu@weiqiang.org][邮件]]联系删除。随机添加，无排名。
 ** [[https://yihui.org][谢益辉]]
 :PROPERTIES:
 :URL: https://yihui.org/cn/index.xml
@@ -163,6 +163,30 @@
 :ENABLED: yes
 :END:
 80后，文字朴实，值得一读。
+** [[https://zhujay.com][朱小呆]]
+:PROPERTIES:
+:URL: https://zhujay.com/feed
+:ENABLED: yes
+:END:
+朱小呆，记录生活、分享美好。
+** [[https://zhou.ge][忆往事]] :80后:
+:PROPERTIES:
+:URL: https://zhou.ge/feed/
+:ENABLED: yes
+:END:
+周哥，80后，客家人。
+** [[https://www.3v.hk][允赫先森'sBlog]] :80后:
+:PROPERTIES:
+:URL: https://www.3v.hk/feed/
+:ENABLED: yes
+:END:
+允赫先森，80后自由职业者。
+** [[https://xyzbz.cn][子夜松声]]
+:PROPERTIES:
+:URL: https://xyzbz.cn/feed/
+:ENABLED: yes
+:END:
+网友小宋，生活博客。
 
 * 博客聚集
 阅读各博客聚集的精选文章。
