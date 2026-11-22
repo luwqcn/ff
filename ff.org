@@ -133,6 +133,36 @@
 :ENABLED: yes
 :END:
 摄影、音乐、博客、生活。
+** [[https://www.pgoj.top][平哥偶记]]
+:PROPERTIES:
+:URL: https://www.pgoj.top/feed
+:ENABLED: yes
+:END:
+博客历程长，文字耐读。
+** [[https://www.mrhe.net][飞絮落叶雪]]
+:PROPERTIES:
+:URL: https://www.mrhe.net/index.xml
+:ENABLED: yes
+:END:
+中年大叔老何。
+** [[https://www.zhyok.cn][秋記]] :80后:
+:PROPERTIES:
+:URL: https://www.zhyok.cn/feed/
+:ENABLED: yes
+:END:
+一个叛逆的八零后日常博客。
+** [[https://synyan.cn][旅行漫记]]
+:PROPERTIES:
+:URL: https://synyan.cn/feed/
+:ENABLED: yes
+:END:
+摄影、旅行、博物馆，20多年老博客，阅之可增见闻。
+** [[https://www.iyuren.com][山野愚人居]] :80后:
+:PROPERTIES:
+:URL: https://www.iyuren.com/rss
+:ENABLED: yes
+:END:
+80后，文字朴实，值得一读。
 
 * 博客聚集
 阅读各博客聚集的精选文章。
